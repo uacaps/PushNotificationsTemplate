@@ -12,7 +12,7 @@ Well, we at CAPS wondered the same thing, so we went ahead and set one up for ev
 * [The Android App](#the-sample-app)
 * [The Server App](#the-server-app)
 
-## The Sample App
+## The Android App
 
 First let us take a look at the sample Android app provided in the **GCM Template** folder of the root directory. Inside you will find an app with 3 files.
 
