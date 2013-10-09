@@ -94,6 +94,19 @@ public class GcmIntentService extends IntentService {
     // This is just one simple example of what you might choose to do with
     // a GCM message.
     private void sendNotification(String msg) {
+        //Adds Default notification sound when you send the notification
+        try {
+			Uri notification = RingtoneManager
+					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(),
+					notification);
+			r.play();
+		} catch (Exception e) {
+		}
+		//Adds vibrator service to the app.
+		Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		// Vibrate for 500 milliseconds
+		v.vibrate(500);
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
