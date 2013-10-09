@@ -11,6 +11,7 @@ Well, we at CAPS wondered the same thing, so we went ahead and set one up for ev
 * What You Get
    * [The Android App](#the-sample-app)
    * [The Server App](#the-server-app)
+   * [The iOS App](#the-ios-app)
 * [Making it Work](#making-it-work)
 * [Scaling](#scaling)
 
@@ -30,6 +31,7 @@ First let us take a look at the sample Android app provided in the **GCM Templat
 
 This app needs no edits to get push notifications working. You will need to grab the RegistrationId in the LogCat, but we will talk about that soon.
 
+## The iOS App
 
 ## The Server App
 
