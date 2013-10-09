@@ -12,7 +12,7 @@ Well, we at CAPS wondered the same thing, so we went ahead and set one up for ev
    * [The Android App](#the-sample-app)
    * [The Server App](#the-server-app)
 * [Making it Work](#making-it-work)
-
+* [Scaling](#scaling)
 
 ## The Android App
 
@@ -87,3 +87,9 @@ This should trigger the Web API method <code>testPush()</code> to be hit and sen
 
 
 ## Scaling
+
+So this is great for testing and all, but what about building a system? Here are a few tips and tricks that might help.
+
+* If you are using PushSharp, you would simply queue additional notifictions for additional devices.
+* Store device tokens in your database and then trigger them on events in your system for registered users.
+* Consider moving the push broker to be a global variable so it is not instantiated every time you want to send a message. If your push load is extra heavy, definitely consider moving the notification triggering to a background thread or other server.
