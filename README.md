@@ -7,7 +7,22 @@ Let's face it, setting up push notifications in an Android app for the first tim
 
 Well, we at CAPS wondered the same thing, so we went ahead and set one up for everyone!
 
+## Table of Contents
 
-The Sample App
-============================
+* [The Android App](#the-sample-app)
+* [The Server App](#the-server-app)
 
+## The Sample App
+
+First let us take a look at the sample Android app provided in the **GCM Template** folder of the root directory. Inside you will find an app with 3 files.
+
+* **MainActivity.java**
+    * The startup activity for the app. Nothing special here, but all of our registration setup with Google will go in this class.
+    
+* **GcmIntentService.java**
+    * This class will be what handles the push notification when it arrives. The <code>onHandleIntent()</code> method handles the raw intent from the push notification services of the operating system, while <code>sendNotification(String msg)</code> will display the text of the notification in the Notifcation Drawer.
+    
+* **GcmBroadcastReceiver.java**
+    * This class allows you to receive intents, in our case GCM Intents. It's basically like a switchboard that routes the notification to the <code>GcmIntentService.java</code> class.
+
+## The Server App
