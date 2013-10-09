@@ -10,7 +10,7 @@ using PushSharp.Android;
 namespace PushTest.Controllers
     
 {
-    public class ValuesController : ApiController
+    public class PushController : ApiController
     {
         [HttpGet]
         public void testPush()
@@ -30,7 +30,7 @@ namespace PushTest.Controllers
             push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU"));
             //Fluent construction of an Android GCM Notification
             //IMPORTANT: For Android you MUST use your own RegistrationId here that gets generated within your Android app itself!
-            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("DEVICE_REGISTRATION_ID")
+            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("APA91bGDFHk6HCWxskob04URTmQ-MDV3FdKJarbz0CcMgkxRtmQdSTqp9zoWDioimi0L-fNiTcgeppRsdGyMRv2gW1FM4FZFV9slikaSiKrY8s-b3BH2T-bii6kEojdXoM9FR0I6vj2E8WDWLbApaHHYgoBU6wuwWA")
                       .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
         }
     }
