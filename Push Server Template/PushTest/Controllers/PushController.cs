@@ -20,13 +20,14 @@ namespace PushTest.Controllers
             var push = new PushBroker();
             
             //**** iOS Notification ******
-            //Read in the Bytes of the apple certificate. Here we make one for dev and another for production
+            //Establish the file path to your certificates Here we make one for dev and another for production
             String devCertificatePath = "ApnsDevSandboxCert.p12";
             String prodCertificatePath = "ApnsProductionSandboxCert.p12";
 
             //If the file exists, go ahead and use it to send an apple push notification
             if (File.Exists(devCertificatePath))
             {
+                //Read in the Bytes of the apple certificate.
                 var appleCert = File.ReadAllBytes(devCertificatePath);
 
                 //Give the apple certificate and its password to the push broker for processing
