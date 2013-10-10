@@ -20,7 +20,7 @@ namespace PushTest.Controllers
             var push = new PushBroker();
             
             //**** iOS Notification ******
-            //Establish the file path to your certificates Here we make one for dev and another for production
+            //Establish the file path to your certificates. Here we make one for dev and another for production
             String devCertificatePath = "ApnsDevSandboxCert.p12";
             String prodCertificatePath = "ApnsProductionSandboxCert.p12";
 
