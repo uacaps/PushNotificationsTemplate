@@ -26,11 +26,12 @@ namespace PushTest.Controllers
                            .WithBadge(7)
                            .WithSound("sound.caf"));*/
 
+
             //Registering the GCM Service and sending an Android Notification
             push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU"));
             //Fluent construction of an Android GCM Notification
             //IMPORTANT: For Android you MUST use your own RegistrationId here that gets generated within your Android app itself!
-            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("REGISTARATION_ID")
+            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("DEVICE_REGISTRATION_ID")
                       .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
         }
     }
