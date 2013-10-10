@@ -17,6 +17,78 @@ Well, we at CAPS wondered the same thing, so we went ahead and set one up for ev
 
 ## The iOS App
 
+To start receiving push notifications on your iOS devices, there is a little bit of set up work that must be done before writing any code in Xcode. Here's what you need to do:
+
+**Create An App ID**
+* Go to the [iOS Developer Center](https://developer.apple.com)
+* Click "Certificates, Identifiers and Profiles"
+* Create an AppId
+* Make sure you enable Push Notifications at the very bottom of the page
+
+**Provisioning Profile**
+* Create a new Development Provisioning Profile for the AppId you created
+
+**Certificates**
+* Create a new certificate of type "Apple Push Notification service SSL (Sandbox)"
+* Select the same AppID you've been using so far.
+* Open "Keychain Access" on your Mac
+* Click "Keychain Access->Certificate Assistant->Request A Certificate from a Certificate Authority" in the menu
+* Enter in your credentials, and make sure it's "Saved to Disk", not "Email to Authority"
+* Save it to Desktop
+* Go back to your web browser, and continue where you left off in the dev portal
+* Upload the certificate request and it will give you a certificate to download
+* Add the downloaded certificate to Keychain Access
+* Select the certificate, and then click "File->Export Items" in the menu
+* Export it as a .p12 file - this is what you'll add to your Push Server
+
+**Coding The App**
+
+After adding the .p12 file to your Push Server, and setting that up, you're ready to begin adding Push Notification functionality to your iOS app. There's really not much you need to do here - and we've created a special class for you that handles a lot of the functionality, <code>PusherMan.{h,m}</code>. Add those 2 files to your project, and then:
+
+<code>#import "PusherMan.h"</code> into
+* AppDelegate.h
+* Any class/controller where you will be registering notifications with your server
+
+PusherMan is a singleton class that just holds onto your device token during the duration of the app, and handles a couple auxilliary methods for registering for notifications with Apple, and retrieving the types of notification that a current device is registered for. Once you've imported PusherMan to your classes, there are only three more methods to add to your <code>AppDelegate.m</code> file, and you are ready to roll. Add these three methods below.
+
+```objc
+#pragma mark - Push Notification Methods
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    // Successfully registered the current device with Apple's Push Notification Service
+	[PusherMan setDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
+    // The App was unsuccessful in registering this device for APNS
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // This method is called whenever the App receives a Push Notification from Apple,
+    // and the app is open - or they tap on the actual push notification on screen that
+    // then launches this app and calls this method.
+    NSLog(@"Notification: %@", userInfo);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Noticiation" message:userInfo[@"alert"] delegate:nil cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
+    [alertView show];
+}
+```
+
+All of these methods are delegate callbacks for either successfully registering for Push Notifications, failing to register, or actually receiving the push notification on your device. These three have to be implemented to receive push notification functionality. Also, at the very top of your AppDelegate should be the method, <code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</code>. Add this line to that method:
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [PusherMan registerAppForPushNotifications];
+    return YES;
+}
+```
+
+All that line does is begin the process of registering for notifications, and then the delegate methods you implemented a second ago handle the rest.
+
+**Coding Style for Notifications**
+
+Once you've set up your app to receive/handle push notifications, you still need to talk to your server to let it know how/when to actually send the notifications. How your app does this is entirely up to you, and changes on a project by project basis.
+
 ## The Android App
 
 First let us take a look at the sample Android app provided in the **Android App Template** folder of the root directory. Inside you will find an app with 3 files.
