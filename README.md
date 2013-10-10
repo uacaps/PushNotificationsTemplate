@@ -19,7 +19,7 @@ Well, we at CAPS wondered the same thing, so we went ahead and set one up for ev
 
 ## The Android App
 
-First let us take a look at the sample Android app provided in the **GCM Template** folder of the root directory. Inside you will find an app with 3 files.
+First let us take a look at the sample Android app provided in the **Android App Template** folder of the root directory. Inside you will find an app with 3 files.
 
 * **MainActivity.java**
     * The startup activity for the app. Nothing special here, but all of our registration setup with Google will go in this class.
@@ -35,7 +35,7 @@ This app needs no edits to get push notifications working. You will need to grab
 
 ## The Server App
 
-We have provided a sample push server using [PushSharp](https://github.com/Redth/PushSharp), a great C# library for sending Android and iOS push notifications (and blackberry and windows phone). It is an MVC 4 project that uses Web API to send a test push notification, perfect for getting things up and running. Open up the project solution and head to the Controllers folder to find <code>PushController.cs</code> Here you will find the following Web API method:
+We have provided a sample push server using [PushSharp](https://github.com/Redth/PushSharp), a great C# library for sending Android and iOS push notifications (and blackberry and windows phone). It is an MVC 4 project that uses Web API to send a test push notification, perfect for getting things up and running. Open up the project solution in the **Push Server Template -> PushTest** and head to the Controllers folder to find <code>PushController.cs</code> Here you will find the following Web API method:
 
 ```csharp
 [HttpGet]
