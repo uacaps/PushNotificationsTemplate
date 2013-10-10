@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using PushSharp;
 using PushSharp.Android;
+using PushSharp.Apple;
+using System.IO;
 
 namespace PushTest.Controllers
     
@@ -16,23 +18,39 @@ namespace PushTest.Controllers
         public void testPush()
         {
             var push = new PushBroker();
-            /*
-            //Registering the Apple Service and sending an iOS Notification
-            var appleCert = File.ReadAllBytes("ApnsSandboxCert.p12"));
-            push.RegisterAppleService(new ApplePushChannelSettings(appleCert, "pwd"));
+            
+            //**** iOS Notification ******
+            //Read in the Bytes of the apple certificate. Here we make one for dev and another for production
+            String devCertificatePath = "ApnsDevSandboxCert.p12";
+            String prodCertificatePath = "ApnsProductionSandboxCert.p12";
+
+            //If the file exists, go ahead and use it to send an apple push notification
+            if (File.Exists(devCertificatePath))
+            {
+                var appleCert = File.ReadAllBytes("ApnsDevSandboxCert.p12");
+                //var appleCert = File.ReadAllBytes("ApnsProductionSandboxCert.p12");
+
+                //Give the apple certificate and its password to the push broker for processing
+                push.RegisterAppleService(new ApplePushChannelSettings(appleCert, "password"));
+
+                //Queue the iOS push notification
                 push.QueueNotification(new AppleNotification()
-                           .ForDeviceToken("DEVICE TOKEN HERE")
-                           .WithAlert("Hello World!")
-                           .WithBadge(7)
-                           .WithSound("sound.caf"));*/
+                               .ForDeviceToken("DEVICE_TOKEN_HERE")
+                               .WithAlert("Hello World!")
+                               .WithBadge(7)
+                               .WithSound("sound.caf"));
+            }
+            //*********************************
 
 
-            //Registering the GCM Service and sending an Android Notification
+            //**** Android Notification ******
+            //Register the GCM Service and sending an Android Notification with your browser API key found in your google API Console for your app. Here, we use ours.
             push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU"));
-            //Fluent construction of an Android GCM Notification
-            //IMPORTANT: For Android you MUST use your own RegistrationId here that gets generated within your Android app itself!
+
+            //Queue the Android notification. Unfortunately, we have to build this packet manually. 
             push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("DEVICE_REGISTRATION_ID")
                       .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
+            //*********************************
         }
     }
 }
