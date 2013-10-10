@@ -39,7 +39,7 @@ To start receiving push notifications on your iOS devices, there is a little bit
 * Upload the certificate request and it will give you a certificate to download
 * Add the downloaded certificate to Keychain Access
 * Select the certificate, and then click "File->Export Items" in the menu
-* Export it as a .p12 file - this is what you'll add to your Push Server
+* Export it as a .p12 file - this is what you'll add to your Push Server. We will be using them in [The Server App](#the-server-app) section 
 
 **Coding The App**
 
