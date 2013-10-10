@@ -111,44 +111,48 @@ We have provided a sample push server using [PushSharp](https://github.com/Redth
 
 ```csharp
 [HttpGet]
-        public void testPush()
-        {
-             var push = new PushBroker();
+public void testPush()
+{
+	var push = new PushBroker();
             
-            //**** iOS Notification ******
-            //Establish the file path to your certificates. Here we make one for dev and another for production
-            String devCertificatePath = "ApnsDevSandboxCert.p12";
-            String prodCertificatePath = "ApnsProductionSandboxCert.p12";
+	//**** iOS Notification ******
+	//Establish the file path to your certificates. Here we make one for dev and another for production
+	String devCertificatePath = "ApnsDevSandboxCert.p12";
+	String prodCertificatePath = "ApnsProductionSandboxCert.p12";
 
-            //If the file exists, go ahead and use it to send an apple push notification
-            if (File.Exists(devCertificatePath))
-            {
-                //Read in the Bytes of the apple certificate.
+	//If the file exists, go ahead and use it to send an apple push notification
+	if (File.Exists(devCertificatePath))
+	{
+		//Read in the Bytes of the apple certificate.
                 var appleCert = File.ReadAllBytes(devCertificatePath);
 
                 //Give the apple certificate and its password to the push broker for processing
                 push.RegisterAppleService(new ApplePushChannelSettings(appleCert, "password"));
 
                 //Queue the iOS push notification
-                push.QueueNotification(new AppleNotification()
+		push.QueueNotification(new AppleNotification()
                                .ForDeviceToken("DEVICE_TOKEN_HERE")
                                .WithAlert("Hello World!")
                                .WithBadge(7)
                                .WithSound("sound.caf"));
-            }
-            //*********************************
+	}
+	//*********************************
 
 
-            //**** Android Notification ******
-            //Register the GCM Service and sending an Android Notification with your browser API key found in your google API Console for your app. Here, we use ours.
-            push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU"));
+	//**** Android Notification ******
+	//Register the GCM Service and sending an Android Notification with your browser API key found in your google API Console for your app. Here, we use ours.
+	push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU"));
 
-            //Queue the Android notification. Unfortunately, we have to build this packet manually. 
-            push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("DEVICE_REGISTRATION_ID")
+	//Queue the Android notification. Unfortunately, we have to build this packet manually. 
+	push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("DEVICE_REGISTRATION_ID")
                       .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
-            //*********************************
-        }
+	//*********************************
+}
 ```
+
+**iOS Notifications**
+
+**Android (Google Cloud Messaging) Notifications**
 
 <code>AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU</code> in the GcmPushChannelSettings constructor is the test app's api key retreived from the Google API Console. The input parameter to the ForDeviceRegistrationId method is where you will put the device registration Id for your particular device. Where might one find this Id? I'm glad you asked.
 
