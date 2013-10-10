@@ -1,18 +1,48 @@
+//  Copyright (c) 2013 The Board of Trustees of The University of Alabama
+//  All rights reserved.
 //
-//  CAPSAppDelegate.m
-//  CAPSPushNotificationTest
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions
+//  are met:
 //
-//  Created by Ben Gordon on 10/10/13.
-//  Copyright (c) 2013 CAPS. All rights reserved.
+//  1. Redistributions of source code must retain the above copyright
+//  notice, this list of conditions and the following disclaimer.
+//  2. Redistributions in binary form must reproduce the above copyright
+//  notice, this list of conditions and the following disclaimer in the
+//  documentation and/or other materials provided with the distribution.
+//  3. Neither the name of the University nor the names of the contributors
+//  may be used to endorse or promote products derived from this software
+//  without specific prior written permission.
 //
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+//  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+//  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+//  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+//  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+//  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+//   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+//  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+//  STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+//  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "CAPSAppDelegate.h"
+#import "PusherMan.h"
 
 @implementation CAPSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Register for Push Notifications
+    // - This method contacts Apple's server and attempts to register
+    // - this device for push notifications. It will either return a
+    // - device token in the didRegisterForRemoteNotificationsWithDeviceToken
+    // - method below, or will call the didFailToRegisterForRemoteNotificationsWithError
+    // - method if it fails to register (user may click they don't want to receive
+    // - notifications).
+    [PusherMan registerAppForPushNotifications];
+    
     return YES;
 }
 							
@@ -46,25 +76,22 @@
 
 #pragma mark - Push Notification Methods
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    // Successfully registered the current device with Apple's Push Notification Service
 	[PusherMan setDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
+    // The App was unsuccessful in registering this device for APNS
 	NSLog(@"Failed to get token, error: %@", error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    /*
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateBusesAndStops" object:userInfo];
-     UIWindow *window = [[UIApplication sharedApplication] windows][0];
-     [NotificationView showNotificationInView:window withText:userInfo[@"alert"] duration:2.0 type:NotificationViewTypeStandard];
-     */
-    if (userInfo[@"c"] && userInfo[@"r"]) {
-        DtoGetCurrentCallResponse *response = [[DtoGetCurrentCallResponse alloc] init];
-        response.CallId = [NSNumber numberWithInteger:[userInfo[@"c"] intValue]];
-        response.ResponderStatusId = [NSNumber numberWithInteger:[userInfo[@"r"] intValue]];
-        [[TenEightSingleton sharedSingleton] checkCurrentCallForUser:response];
-    }
+    // This method is called whenever the App receives a Push Notification from Apple,
+    // and the app is open - or they tap on the actual push notification on screen that
+    // then launches this app and calls this method.
+    NSLog(@"Notification: %@", userInfo);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Noticiation" message:userInfo[@"alert"] delegate:nil cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
+    [alertView show];
 }
 
 @end
