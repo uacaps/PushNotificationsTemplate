@@ -67,9 +67,9 @@ We have provided a sample push server using [PushSharp](https://github.com/Redth
 
 **Retrieve the Device Registration Id**
 
-Every Android device will have a registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app sets up push notifications for itself. Each time you want to send a push notification to a specific device, you will package this identifier with the packet so Google knows where to route the message. 
+Every Android device will have a registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app sets up push notifications for itself. Each time you want to send a push notification to a specific device, you will need to retreive this identifier from google.
 
-Oh, and good news: Our sample Android app already does this! Take a look in the <code>doInBackground() method in PushAsyncTask</code>. Here you are fetching the device registration id from Google, and having it print to the LogCat. In a true system, once you receive the id, you would upload it to your server for safe keeping, but for the sake of example, run the sample app on your droid device and then grab the device registration id from the LogCat. It should look something like this
+Good news: Our sample Android app already does this! Take a look in the <code>doInBackground() method in PushAsyncTask</code>. Here you are fetching the device registration id from Google, and having it print to the LogCat. In a true system, once you receive the id, you would upload it to your server for safe keeping, but for the sake of example, run the sample app on your droid device and then grab the device registration id from the LogCat. It should look something like this
 
 ```csharp
 APA71bGDFHk6HCWxskob04URTmd-MDV3FdKJarba0CcMgkxRtpQdSTqg9zoWDioimi0L-fNiTcgepiRsdGyMbv2gW1FM4FZFV9xlikaSiKrY8s-b3BH2T-bii6kEojdXoM9FR0I6vj2E8WDWLbApaHHYgoBU6wuwWA
