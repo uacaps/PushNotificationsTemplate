@@ -28,7 +28,6 @@ namespace PushTest.Controllers
             if (File.Exists(devCertificatePath))
             {
                 var appleCert = File.ReadAllBytes(devCertificatePath);
-                //var appleCert = File.ReadAllBytes("ApnsProductionSandboxCert.p12");
 
                 //Give the apple certificate and its password to the push broker for processing
                 push.RegisterAppleService(new ApplePushChannelSettings(appleCert, "password"));
