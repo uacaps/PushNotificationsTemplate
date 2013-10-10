@@ -27,7 +27,7 @@ namespace PushTest.Controllers
             //If the file exists, go ahead and use it to send an apple push notification
             if (File.Exists(devCertificatePath))
             {
-                var appleCert = File.ReadAllBytes("ApnsDevSandboxCert.p12");
+                var appleCert = File.ReadAllBytes(devCertificatePath);
                 //var appleCert = File.ReadAllBytes("ApnsProductionSandboxCert.p12");
 
                 //Give the apple certificate and its password to the push broker for processing
