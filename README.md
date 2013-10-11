@@ -195,7 +195,7 @@ appleCertificate = Properties.Resources.DEV_CERT_NAME;
 ![API Console](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/GoogleAPIConsoleScreenshot.jpg)
 
 
-## Making it Work
+## Making It Work
 
 
 **Android Device Credentials**
