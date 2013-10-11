@@ -107,7 +107,9 @@ This app needs no edits to get push notifications working. You will need to grab
 
 ## The Server App
 
-We have provided a sample push server using [PushSharp](https://github.com/Redth/PushSharp), a great C# library for sending Android and iOS push notifications (and blackberry and windows phone). It is an MVC 4 project that uses Web API to send a test push notification, perfect for getting things up and running. Open up the project solution in the **Push Server Template -> PushTest** and head to the Controllers folder to find <code>PushController.cs</code> Here you will find the following Web API method:
+We have provided a sample push server using [PushSharp](https://github.com/Redth/PushSharp), a great C# library for sending Android and iOS push notifications (and blackberry and windows phone). You can install it through the nuget package manager in visual studio, but for brevity, we have already set that up for you in the sample app. 
+
+The push server app is written in MVC 4 and uses Web API to send a test push notification in an event-driven manner, perfect for getting things up and running. Open up the project solution in the **Push Server Template** folder and head to the Controllers folder to find <code>PushController.cs</code> Here you will find the following Web API method:
 
 ```csharp
 [HttpGet]
@@ -151,6 +153,16 @@ public void testPush()
 ```
 
 **iOS Notifications**
+
+iOS notifications are authenticated through .p12 certificates or, more precisely, the certificates we set up in [The iOS App](#the-ios-app) section. A certificate will be bundled with your notification when you send it to Apple for processing, allowing them to know you are approved to send notifications for a specific app. Typically, you have two certificatets, one for development and one for production, both of which we have made a place for in the sample app. 
+
+Once you have generated these two certificates, we are going to add them as a resource. Here are the steps to make that happen: 
+
+* Go to the Solution explorer and right click on your project file (not solution file). Select "Properties".
+* From the left-hand menu of the properties pane, select Resources.
+* Click the "Add Resource" dropdown and select "Add Existing File". Navigate to your certifcates and select it. Repeat for the other certificate, if you have two (for dev and production).
+* 
+
 
 **Android (Google Cloud Messaging) Notifications**
 
