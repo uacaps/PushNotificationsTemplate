@@ -188,11 +188,11 @@ Once you have generated these two certificates, we are going to add them as a re
 appleCertificate = Properties.Resources.DEV_CERT_NAME;
 ```
  
- * Now that your certificates are in place, you need only provide a device token and queue your message!
+ * Now that your certificates are in place, you need only provide a device token and to queue your message!
 
 **Android (Google Cloud Messaging) Notifications**
 
-<code>AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU</code> in the GcmPushChannelSettings constructor is the test app's api key retreived from the Google API Console. You can find this value here.
+<code>AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU</code> in the GcmPushChannelSettings constructor is the test app's api key retreived from the Google API Console. You can find this key here.
 
 ![API Console](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/GoogleAPIConsoleScreenshot.jpg)
 
