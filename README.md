@@ -117,9 +117,9 @@ Take a look in the <code>MainActivity.java</code> and you will find this variabl
 
 **Retrieve the Device Registration Id**
 
-Every Android device will have a device registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app registers for push notifications. Each time you have a new app that you want to send push notifications to, you will need to retreive this identifier from google.
+Every Android device will have a Device Registration Id for push notifications for a specific app. It is a long string of characters that your device will have assigned to it when the app registers for push notifications. Each time you have a new app that you want to send push notifications to, you will need to retreive this identifier from google.
 
-Good news: Our sample Android app already does this! Take a look in the <code>doInBackground() method in PushAsyncTask</code>. Here you are fetching the device registration id from Google, and having it print to the LogCat. In a true system, once you receive the id, you would upload it to your server for safe keeping, but for the sake of example, run the sample app on your droid device and then grab the device registration id from the LogCat. It should look something like this
+Good news: Our sample Android app already does this! Take a look in the <code>doInBackground() method in PushAsyncTask</code>. Here you are fetching the Device Registration Id from Google, and having it print to the LogCat. In a true system, once you receive the id, you would upload it to your server for safe keeping, but for the sake of example, run the sample app on your droid device and then grab the Device Registration Id from the LogCat. It should look something like this
 
 ```csharp
 APA71bGDFHk6HCWxskob04URTmd-MDV3FdKJarba0CcMgkxRtpQdSTqg9zoWDioimi0L-fNiTcgepiRsdGyMbv2gW1FM4FZFV9xlikaSiKrY8s-b3BH2T-bii6kEojdXoM9FR0I6vj2E8WDWLbApaHHYgoBU6wuwWA
@@ -202,7 +202,7 @@ appleCertificate = Properties.Resources.DEV_CERT_NAME;
 
 **Android Device Credentials**
 
-In the <code>testPush()</code> method in <code>PushController.cs</code>, you should see a string called "DEVICE_REGISTARATION_ID". Replace it with a string containing the device registration id we retrieved in [The Android App](#the-sample-app) section. We are now ready to test!
+In the <code>testPush()</code> method in <code>PushController.cs</code>, you should see a string called "DEVICE_REGISTARATION_ID". Replace it with a string containing the Device Registration Id we retrieved in [The Android App](#the-sample-app) section. We are now ready to test!
 
 **iPhone Device Credentials**
 
