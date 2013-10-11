@@ -78,6 +78,7 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
     // Successfully registered the current device with Apple's Push Notification Service
 	[PusherMan setDeviceToken:deviceToken];
+    NSLog(@"%@", [PusherMan deviceToken]);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
