@@ -117,28 +117,27 @@ public void testPush()
 {
 	var push = new PushBroker();
             
-	//**** iOS Notification ******
-	//Establish the file path to your certificates. Here we make one for dev and another for production
-	String devCertificatePath = "ApnsDevSandboxCert.p12";
-	String prodCertificatePath = "ApnsProductionSandboxCert.p12";
+            //**** iOS Notification ******
+            //Establish the file path to your certificates. Here we make one for dev and another for production
+            byte[] appleCertificate = null;
+            //appleCertificate = Properties.Resources.DEV_CERT_NAME;
+            //appleCertificate = Properties.Resources.PROD_CERT_NAME;
 
-	//If the file exists, go ahead and use it to send an apple push notification
-	if (File.Exists(devCertificatePath))
-	{
-		//Read in the Bytes of the apple certificate.
-                var appleCert = File.ReadAllBytes(devCertificatePath);
+            //If the file exists, go ahead and use it to send an apple push notification
+            if (appleCertificate != null)
+            {
 
                 //Give the apple certificate and its password to the push broker for processing
-                push.RegisterAppleService(new ApplePushChannelSettings(appleCert, "password"));
+                push.RegisterAppleService(new ApplePushChannelSettings(appleCertificate, "password"));
 
                 //Queue the iOS push notification
-		push.QueueNotification(new AppleNotification()
+                push.QueueNotification(new AppleNotification()
                                .ForDeviceToken("DEVICE_TOKEN_HERE")
                                .WithAlert("Hello World!")
                                .WithBadge(7)
                                .WithSound("sound.caf"));
-	}
-	//*********************************
+            }
+            //*********************************
 
 
 	//**** Android Notification ******
