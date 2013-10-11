@@ -107,9 +107,9 @@ public class GcmIntentService extends IntentService {
 			r.play();
 		} catch (Exception e) {
 		}
-		//Adds vibrator service to the app.
+		//Adds Vibrator service to the app.
 		Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		// Vibrate for 500 milliseconds
+		// Vibrates Device for 500 milliseconds
 		v.vibrate(500);
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -119,7 +119,7 @@ public class GcmIntentService extends IntentService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-        .setSmallIcon(R.drawable.ic_launcher)
+        .setSmallIcon(R.drawable.ic_logo)
         .setContentTitle("PushTest")
         .setStyle(new NotificationCompat.BigTextStyle()
         .bigText(msg))

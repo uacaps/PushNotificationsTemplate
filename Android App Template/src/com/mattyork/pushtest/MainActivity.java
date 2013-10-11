@@ -77,7 +77,6 @@ public class MainActivity extends Activity {
      * Class variable for the registration id
      * Either pulled from shared preferences or retrieved from Google
      */
-    
     String regid;
     
     public static Context getActivityContext() {
@@ -95,7 +94,7 @@ public class MainActivity extends Activity {
         gcm = new GoogleCloudMessaging();
         
         // Check device for Play Services APK. If check succeeds, proceed with
-        //  GCM registration.
+        // GCM registration.
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
