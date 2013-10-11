@@ -7,7 +7,8 @@ using System.Web.Http;
 using PushSharp;
 using PushSharp.Android;
 using PushSharp.Apple;
-using System.IO;
+using System.Resources;
+using System.Reflection;
 
 namespace PushTest.Controllers
     
@@ -20,18 +21,17 @@ namespace PushTest.Controllers
             var push = new PushBroker();
             
             //**** iOS Notification ******
-            //Establish the file path to your certificates. Here we make one for dev and another for production
-            String devCertificatePath = "ApnsDevSandboxCert.p12";
-            String prodCertificatePath = "ApnsProductionSandboxCert.p12";
+            //Establish the connection to your certificates. Here we make one for dev and another for production
+            byte[] appleCertificate = null;
+            //appleCertificate = Properties.Resources.DEV_CERT_NAME;
+            //appleCertificate = Properties.Resources.PROD_CERT_NAME;
 
             //If the file exists, go ahead and use it to send an apple push notification
-            if (File.Exists(devCertificatePath))
+            if (appleCertificate != null)
             {
-                //Read in the Bytes of the apple certificate.
-                var appleCert = File.ReadAllBytes(devCertificatePath);
 
                 //Give the apple certificate and its password to the push broker for processing
-                push.RegisterAppleService(new ApplePushChannelSettings(appleCert, "password"));
+                push.RegisterAppleService(new ApplePushChannelSettings(appleCertificate, "password"));
 
                 //Queue the iOS push notification
                 push.QueueNotification(new AppleNotification()

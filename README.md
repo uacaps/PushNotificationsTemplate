@@ -1,6 +1,9 @@
 Push Notifications Template
 ============================
 
+![Android Screenshot](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/AndroidPushScreenshot.png)
+![iPhone Screenshot](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/iosScreen.png)
+
 **Laziness is Good**
 
 Let's face it, setting up push notifications for the first time is a bit daunting... There's the <code>SenderId</code> the <code>RegistrationId</code>, the <code>AppId</code>. What does it all mean??? When do I use what? Why isn't there a working sample project that I can drop in my app information and it just works? 
@@ -104,6 +107,12 @@ First let us take a look at the sample Android app provided in the **Android App
 * **GcmBroadcastReceiver.java**
     * This class allows you to receive intents, in our case GCM Intents. It's basically like a switchboard that routes the notification to the <code>GcmIntentService.java</code> class.
 
+**The Sender Id**
+
+Take a look in the <code>MainActivity.java</code> and you will find this variable near the top: <code>String SENDER_ID = "971352002353";</code>. So, you may be wondering where this seemingly random number comes from. It is actually the Project Number for your app. You can also find it in the goole developer console. For our sample app, we have provided you with this number
+
+![Sender Id](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/SenderIdScreenshot.jpg)
+
 **Retrieve the Device Registration Id**
 
 Every Android device will have a device registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app registers for push notifications. Each time you have a new app that you want to send push notifications to, you will need to retreive this identifier from google.
@@ -181,10 +190,12 @@ appleCertificate = Properties.Resources.DEV_CERT_NAME;
 
 **Android (Google Cloud Messaging) Notifications**
 
-<code>AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU</code> in the GcmPushChannelSettings constructor is the test app's api key retreived from the Google API Console. The input parameter to the ForDeviceRegistrationId method is where you will put the device registration Id for your particular device. Where might one find this Id? I'm glad you asked.
+<code>AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU</code> in the GcmPushChannelSettings constructor is the test app's api key retreived from the Google API Console. You can find this value here.
+
+![API Console](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/GoogleAPIConsoleScreenshot.jpg)
 
 
-## Making it Work
+## Making It Work
 
 
 **Android Device Credentials**
