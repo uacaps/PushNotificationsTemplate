@@ -20,6 +20,7 @@ Well, we at CAPS wondered the same thing, so we went ahead and set one up for ev
 * [Making it Work](#making-it-work)
 * [Scaling](#scaling)
 * [Server Options](#server-options)
+* [Credits](#credits)
 * [License](#license)
 
 ## The iOS App
@@ -232,6 +233,12 @@ In case C#/Microsoft platform isn't your cup of tea for the server stack, there 
 * Ruby - [pushmeup](https://github.com/NicosKaralis/pushmeup)
 * NodeJS iOS - [apnagent](https://github.com/qualiancy/apnagent)
 * NodeJS Android - [node-gcm](https://github.com/ToothlessGear/node-gcm)
+
+## Credits
+
+* [**Matthew York**](https://github.com/MatthewYork) - C# 
+* [**Ben Gordon**](https://github.com/bennyguitar) - iOS
+* [**Aaron Fleshner**](https://github.com/adfleshner) - Android
 
 ## License
 
