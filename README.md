@@ -107,6 +107,12 @@ First let us take a look at the sample Android app provided in the **Android App
 * **GcmBroadcastReceiver.java**
     * This class allows you to receive intents, in our case GCM Intents. It's basically like a switchboard that routes the notification to the <code>GcmIntentService.java</code> class.
 
+**The Sender Id**
+
+Take a look in the <code>MainActivity.java</code> and you will find this variable near the top: <code>String SENDER_ID = "971352002353";</code>. So, you may be wondering where this seemingly random number comes from. It is actually the Project Number for your app. You can also find it in the goole developer console. For our sample app, we have provided you with this number
+
+![Sender Id](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/SenderIdScreenshot.jpg)
+
 **Retrieve the Device Registration Id**
 
 Every Android device will have a device registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app registers for push notifications. Each time you have a new app that you want to send push notifications to, you will need to retreive this identifier from google.
