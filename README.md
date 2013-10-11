@@ -104,8 +104,17 @@ First let us take a look at the sample Android app provided in the **Android App
 * **GcmBroadcastReceiver.java**
     * This class allows you to receive intents, in our case GCM Intents. It's basically like a switchboard that routes the notification to the <code>GcmIntentService.java</code> class.
 
+**Retrieve the Device Registration Id**
 
-This app needs no edits to get push notifications working. You will need to grab the RegistrationId in the LogCat, but we will talk about that soon.
+Every Android device will have a device registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app registers for push notifications. Each time you have a new app that you want to send push notifications to, you will need to retreive this identifier from google.
+
+Good news: Our sample Android app already does this! Take a look in the <code>doInBackground() method in PushAsyncTask</code>. Here you are fetching the device registration id from Google, and having it print to the LogCat. In a true system, once you receive the id, you would upload it to your server for safe keeping, but for the sake of example, run the sample app on your droid device and then grab the device registration id from the LogCat. It should look something like this
+
+```csharp
+APA71bGDFHk6HCWxskob04URTmd-MDV3FdKJarba0CcMgkxRtpQdSTqg9zoWDioimi0L-fNiTcgepiRsdGyMbv2gW1FM4FZFV9xlikaSiKrY8s-b3BH2T-bii6kEojdXoM9FR0I6vj2E8WDWLbApaHHYgoBU6wuwWA
+```
+
+Go ahead and copy/paste this somewhere, as we will need it when it comes time to send a push notification to your device.
 
 ## The Server App
 
@@ -174,21 +183,17 @@ appleCertificate = Properties.Resources.DEV_CERT_NAME;
 
 <code>AIzaSyD3J2zRHVMR1BPPnbCVaB1D_qWBYGC4-uU</code> in the GcmPushChannelSettings constructor is the test app's api key retreived from the Google API Console. The input parameter to the ForDeviceRegistrationId method is where you will put the device registration Id for your particular device. Where might one find this Id? I'm glad you asked.
 
+
 ## Making it Work
 
-**Retrieve the Device Registration Id**
 
-Every Android device will have a registration id for push notifications for an app. It is a long string of characters that your device will have assigned to it when the app sets up push notifications for itself. Each time you want to send a push notification to a specific device, you will need to retreive this identifier from google.
+**Android Device Credentials**
 
-Good news: Our sample Android app already does this! Take a look in the <code>doInBackground() method in PushAsyncTask</code>. Here you are fetching the device registration id from Google, and having it print to the LogCat. In a true system, once you receive the id, you would upload it to your server for safe keeping, but for the sake of example, run the sample app on your droid device and then grab the device registration id from the LogCat. It should look something like this
+In the <code>testPush()</code> method in <code>PushController.cs</code>, you should see a string called "DEVICE_REGISTARATION_ID". Replace it with a string containing the device registration id we retrieved in [The Android App](#the-sample-app) section. We are now ready to test!
 
-```csharp
-APA71bGDFHk6HCWxskob04URTmd-MDV3FdKJarba0CcMgkxRtpQdSTqg9zoWDioimi0L-fNiTcgepiRsdGyMbv2gW1FM4FZFV9xlikaSiKrY8s-b3BH2T-bii6kEojdXoM9FR0I6vj2E8WDWLbApaHHYgoBU6wuwWA
-```
+**iPhone Device Credentials**
 
-**Add device to Push Server**
-
-Ok, now flip back over to the <code>PushController.cs</code> file in your push server template project. In the testPush method, you should see a string called "REGISTARATION_ID". Replace it with a string contating your device identifier. We are now ready to test!
+Also, in the <code>testPush()</code> method in <code>PushController.cs</code>, you shoould see a string called "DEVICE_TOKEN_HERE". Replace it with the iOS device token you retrieved in [The iOS App](#the-ios-app) section. This tells PushSharp and, by proxy, Apple which device to send the push notification to.
 
 **Testing 1,2,3**
 
