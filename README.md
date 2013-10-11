@@ -8,6 +8,8 @@ Let's face it, setting up push notifications for the first time is a bit dauntin
 Well, we at CAPS wondered the same thing, so we went ahead and set one up for everyone!
 
 ## Table of Contents
+* What You Need
+   * [Xcode](https://developer.apple.com/xcode/), [Android SDK](http://developer.android.com/sdk/index.html), [Microsoft Visual Studio](http://www.microsoft.com/visualstudio/eng/visual-studio-2013)
 * What You Get
    * [The iOS App](#the-ios-app)
    * [The Android App](#the-sample-app)
@@ -118,7 +120,7 @@ public void testPush()
 	var push = new PushBroker();
             
             //**** iOS Notification ******
-            //Establish the file path to your certificates. Here we make one for dev and another for production
+            //Establish the connections to your certificates. Here we make one for dev and another for production
             byte[] appleCertificate = null;
             //appleCertificate = Properties.Resources.DEV_CERT_NAME;
             //appleCertificate = Properties.Resources.PROD_CERT_NAME;
@@ -153,15 +155,20 @@ public void testPush()
 
 **iOS Notifications**
 
-iOS notifications are authenticated through .p12 certificates or, more precisely, the certificates we set up in [The iOS App](#the-ios-app) section. A certificate will be bundled with your notification when you send it to Apple for processing, allowing them to know you are approved to send notifications for a specific app. Typically, you have two certificatets, one for development and one for production, both of which we have made a place for in the sample app. 
+iOS notifications are authenticated through .p12 certificates, particularly the certificates we set up in [The iOS App](#the-ios-app) section. A certificate will be bundled with your notification when you send it to Apple for processing, allowing them to know you are approved to send notifications for a specific app. Typically, you have two certificatets, one for development and one for production, both of which we have made a place for in the sample app. 
 
 Once you have generated these two certificates, we are going to add them as a resource. Here are the steps to make that happen: 
 
 * Go to the Solution explorer and right click on your project file (not solution file). Select "Properties".
 * From the left-hand menu of the properties pane, select Resources.
 * Click the "Add Resource" dropdown and select "Add Existing File". Navigate to your certifcates and select it. Repeat for the other certificate, if you have two (for dev and production).
-* 
+* Once your certificates are added to the resources, you can access them by the following line in the example code.
 
+```csharp
+appleCertificate = Properties.Resources.DEV_CERT_NAME;
+```
+ 
+ * Now that your certificates are in place, you need only provide a device token and queue your message!
 
 **Android (Google Cloud Messaging) Notifications**
 
