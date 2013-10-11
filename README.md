@@ -2,6 +2,7 @@ Push Notifications Template
 ============================
 
 ![Android Screenshot](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/AndroidPushScreenshot.png)
+![iPhone Screenshot](https://raw.github.com/uacaps/PushNotificationsTemplate/master/Resources/Images/iosScreen.png)
 
 **Laziness is Good**
 
