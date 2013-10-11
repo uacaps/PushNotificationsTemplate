@@ -21,7 +21,7 @@ namespace PushTest.Controllers
             var push = new PushBroker();
             
             //**** iOS Notification ******
-            //Establish the file path to your certificates. Here we make one for dev and another for production
+            //Establish the connection to your certificates. Here we make one for dev and another for production
             byte[] appleCertificate = null;
             //appleCertificate = Properties.Resources.DEV_CERT_NAME;
             //appleCertificate = Properties.Resources.PROD_CERT_NAME;
