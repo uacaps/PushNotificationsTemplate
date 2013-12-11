@@ -18,7 +18,8 @@ namespace PushTest.Controllers
         [HttpGet]
         public void testPush()
         {
-            var push = new PushBroker();
+            using(var push = new PushBroker())
+            {
             
             //**** iOS Notification ******
             //Establish the connection to your certificates. Here we make one for dev and another for production
@@ -51,6 +52,7 @@ namespace PushTest.Controllers
             push.QueueNotification(new GcmNotification().ForDeviceRegistrationId("DEVICE_REGISTRATION_ID")
                       .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
             //*********************************
+            }
         }
     }
 }
