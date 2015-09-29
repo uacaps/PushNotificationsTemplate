@@ -57,7 +57,7 @@ After adding the .p12 file to your Push Server, and setting that up, you're read
 * AppDelegate.h
 * Any class/controller where you will be registering notifications with your server
 
-PusherMan is a singleton class that just holds onto your device token during the duration of the app, and handles a couple auxilliary methods for registering for notifications with Apple, and retrieving the types of notification that a current device is registered for. Once you've imported PusherMan to your classes, there are only three more methods to add to your <code>AppDelegate.m</code> file, and you are ready to roll. Add these three methods below.
+PusherMan is a singleton class that just holds onto your device token during the duration of the app, and handles a couple auxiliary methods for registering for notifications with Apple, and retrieving the types of notification that a current device is registered for. Once you've imported PusherMan to your classes, there are only three more methods to add to your <code>AppDelegate.m</code> file, and you are ready to roll. Add these three methods below.
 
 ```objc
 #pragma mark - Push Notification Methods
